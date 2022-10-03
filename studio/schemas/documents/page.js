@@ -1,34 +1,48 @@
 export default {
-  name: "page",
-  type: "document",
-  title: "Page",
-  __experimental_actions: [
-    // 'create',
-    "update",
-    // 'delete',
-    "publish"
-  ],
+  name: 'page',
+  type: 'document',
+  title: 'Page',
   fields: [
     {
-      name: "title",
-      type: "string",
-      title: "Title"
+      name: 'title',
+      type: 'string',
+      title: 'Title'
     },
     {
-      name: "description",
-      type: "text",
-      title: "Description",
-      description: "Describe your page for search engines and social media."
-    },
-    {
-      name: "keywords",
-      type: "array",
-      title: "Keywords",
-      description: "Add keywords that describes your portfolio.",
-      of: [{ type: "string" }],
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      description: 'Some frontend will require a slug to be set to be able to show the project',
       options: {
-        layout: "grid"
+        source: 'title',
+        maxLength: 96
+      }
+    },
+    {
+      name: 'description',
+      type: 'text',
+      title: 'Description',
+      description: 'Describe your page for search engines and social media.'
+    },
+    {
+      name: 'components',
+      type: 'array',
+      title: 'Components',
+      description: 'Add components to your page',
+      of: [{type: 'imageText'}, {type: 'twoColumnList'}],
+      options: {
+        layout: 'grid'
       }
     }
-  ]
-};
+  ],
+  preview: {
+    select: {
+      title: 'title'
+    },
+    prepare ({title = 'No title'}) {
+      return {
+        title
+      }
+    }
+  }
+}

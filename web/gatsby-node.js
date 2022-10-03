@@ -42,6 +42,42 @@ async function createProjectPages (graphql, actions) {
     })
 }
 
+async function createComponentPages (graphql, actions) {
+  const {createPage} = actions
+  const result = await graphql(`
+    {
+      allSanityPage(filter: {slug: {current: {ne: null}}}) {
+        edges {
+          node {
+            id
+            slug {
+              current
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  if (result.errors) throw result.errors
+
+  const projectEdges = (result.data.allSanityPage || {}).edges || []
+
+  projectEdges
+    .forEach(edge => {
+      const id = edge.node.id
+      const slug = edge.node.slug.current
+      const path = `/${slug}/`
+
+      createPage({
+        path,
+        component: require.resolve('./src/templates/page.js'),
+        context: {id}
+      })
+    })
+}
+
 exports.createPages = async ({graphql, actions}) => {
   await createProjectPages(graphql, actions)
+  await createComponentPages(graphql, actions)
 }
