@@ -46,13 +46,10 @@ async function createComponentPages (graphql, actions) {
   const {createPage} = actions
   const result = await graphql(`
     {
-      allSanityPage(filter: {slug: {current: {ne: null}}}) {
+      allSanityPage {
         edges {
           node {
             id
-            slug {
-              current
-            }
           }
         }
       }
@@ -66,8 +63,8 @@ async function createComponentPages (graphql, actions) {
   projectEdges
     .forEach(edge => {
       const id = edge.node.id
-      const slug = edge.node.slug.current
-      const path = `/${slug}/`
+      //const slug = edge.node.slug.current
+      const path = `/test/`
 
       createPage({
         path,
