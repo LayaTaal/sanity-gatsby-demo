@@ -19,6 +19,7 @@ import projectPortableText from './objects/projectPortableText'
 import simplePortableText from './objects/simplePortableText'
 
 // Components
+import header from './components/header'
 import imageText from './components/imageText'
 import twoColumnList from './components/twoColumnList'
 
@@ -37,6 +38,7 @@ export default createSchema({
     projectPortableText,
     simplePortableText,
     // Components
+    header,
     imageText,
     twoColumnList,
     // The following are document types which will appear

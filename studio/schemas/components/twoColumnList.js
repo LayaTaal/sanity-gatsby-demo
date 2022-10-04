@@ -25,11 +25,7 @@ export default {
       name: 'listItems',
       type: 'array',
       of: [{
-        type: 'object',
-        fields: [
-          {name: 'title', type: 'string', title: 'Title'},
-          {name: 'description', type: 'text', title: 'Description'}
-        ]
+        type: 'header'
       }]
     }
   ],
